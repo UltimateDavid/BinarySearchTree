@@ -12,15 +12,15 @@ namespace ConsoleBinaryTree
         {
             Tree b = new Tree();
             Random rnd = new Random();
-            b.AddNode(b.root,30);
-            b.AddNode(b.root,27);
+            b.Add(b.root,30);
+            b.Add(b.root,27);
             //for (int i = 0; i < 10; i++)
             //{
-            //    b.AddNode(rnd.Next(1,100));
+            //    b.Add(b.root, rnd.Next(1,100));
             //}
-
             b.CheckRoot();
-            Console.ReadLine();
+
+            Console.ReadKey();
         }
     }
 
