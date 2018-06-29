@@ -19,47 +19,71 @@ namespace ConsoleBinaryTree
             //    b.AddNode(rnd.Next(1,100));
             //}
 
-
-
             b.CheckRoot();
             Console.ReadLine();
         }
     }
 
+    
     class Tree
     {
         public Node root;
-        private int num;
 
         public Tree()
         {
             root = null;
         }
-        public void AddNode(int aval)
+        public void Add(Node n, int val)
         {
-            if (root == null)
-                root = new Node(aval);
+            if (n == null)
+                n = new Node(val);
             else
-                root.AddValue(root, aval);
-            num++;
+            {
+                if (val < n.value)
+                {
+                    Add(n.left, val);
+                }
+                if (val > n.value)
+                {
+                    Add(n.right, val);
+                }
+            }
         }
-        public bool Search(Node node, int sval)
+        public bool Search(Node n, int val)
         {
-            return node.SearchValue(root, sval);
+            if (n == null)
+                return false;
+            else if (n.value == val)
+                return true;
+            else if (n.value < val)
+                return Search(n.right, val);
+            else if (n.value > val)
+                return Search(n.left, val);
+            return false;
         }
-        public void Display()
+        public void Display(Node n)
         {
-            if (root != null)
-                root.Display(root);
+            if (n != null)
+                if (n.right != null)
+                    Display(n.right);
+                Console.WriteLine(n.value);
+                if (n.left != null)
+                    Display(n.left);
         }
         public void CheckRoot()
         {
             if (root != null)
+            {
                 Console.WriteLine("Root : " + root.value);
-            if (root.left != null)
-                Console.WriteLine("Left : " + root.left.value);
-            if (root.right != null)
-                Console.WriteLine("Right: " + root.right.value);
+                if (root.left != null)
+                    Console.WriteLine("Left : " + root.left.value);
+                if (root.right != null)
+                    Console.WriteLine("Right: " + root.right.value);
+            }
+            else
+            {
+                Console.WriteLine("Root : null");
+            }
         }
     }
 
@@ -74,35 +98,6 @@ namespace ConsoleBinaryTree
             value = val;
             right = null;
             left = null;
-        }
-        public Node AddValue(Node n, int val)
-        {
-            if (n == null)
-                return new Node(val);
-            else if (n.value < val)
-                return AddValue(n.right, val);
-            else
-                return AddValue(n.left, val);
-        }
-        public bool SearchValue(Node n, int val)
-        {
-            if (n == null)
-                return false;
-            if (n.value == val)
-                return true;
-            if (n.value < val)
-                return SearchValue(n.right, val);
-            if (n.value > val)
-                return SearchValue(n.left, val);
-            return false;
-        }
-        public void Display(Node n)
-        {
-            if (n.right != null)
-                n.Display(n.right);
-            Console.WriteLine(n.value);
-            if (n.left != null)
-                n.Display(n.left);
         }
     }
 }
