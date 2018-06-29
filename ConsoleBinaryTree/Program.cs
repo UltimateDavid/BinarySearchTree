@@ -12,8 +12,8 @@ namespace ConsoleBinaryTree
         {
             Tree b = new Tree();
             Random rnd = new Random();
-            b.AddNode(30);
-            b.AddNode(27);
+            b.AddNode(b.root,30);
+            b.AddNode(b.root,27);
             //for (int i = 0; i < 10; i++)
             //{
             //    b.AddNode(rnd.Next(1,100));
