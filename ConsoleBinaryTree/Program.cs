@@ -4,15 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// This program is a way to reduce computing power in large databases.
+// It stores as many numbers as possible and sorts them.
+// Instead of brute-forcing all numbers in a list,
+// it finds numbers by following the branches
+// it can also quickly using an efficient algorithm
+// sort numbers from small to large
+
 namespace ConsoleBinaryTree
 {
     class Program
     {
         static void Main(string[] args)
         {
+          // First we initialize the tree itself
             Tree b = new Tree();
+            // We add a class so we can add random numbers
             Random rnd = new Random();
+            // We add 500 as our middle and starting value
             b.Add(500,ref b.root);
+            //We add a 100 random numbers between 1 and 1000
             for (int i = 0; i < 100; i++)
             {
                 b.Add(rnd.Next(1,1000), ref b.root);
@@ -30,19 +41,26 @@ namespace ConsoleBinaryTree
         {
             root = null;
         }
+
         public void Add(int val, ref Node n)
+        // Function to add a new node to the tree
         {
+          // If the node is empty, it can be added here
             if (n == null)
                 n = new Node(val);
             else
             {
+              // If the node is not empty, we create a new 'branch'
+              // To the left is smaller, to the right is bigger
                 if (val < n.value)
                     Add(val,ref n.left);
                 if (val > n.value)
                     Add(val,ref n.right);
             }
         }
+
         public bool Search(int val,ref Node n)
+        //Function to search if any number is in the list or not
         {
             if (n == null)
                 return false;
@@ -56,8 +74,11 @@ namespace ConsoleBinaryTree
         }
         public void Display(Node n)
         {
+            // recurring function, it will eventually go through all values
+            // until both the left and right node are full cleared
             if (n != null)
                 if (n.left != null)
+
                     Display(n.left);
             Console.Write(n.value + ", ");
             if (n.right != null)
@@ -77,7 +98,7 @@ namespace ConsoleBinaryTree
                 Console.WriteLine("Root: null");
         }
         public void Input()
-        {
+        {//this is the whole GUI
             while (true)
             {
                 Console.WriteLine("\r\nChoose 1-Search, 2-Display, 3-Add or 4-Exit");
